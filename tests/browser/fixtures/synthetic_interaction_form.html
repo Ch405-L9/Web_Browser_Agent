@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Synthetic Interaction Fixture</title>
+  </head>
+  <body>
+    <form data-test-id="synthetic-interaction-form">
+      <label for="test-name">Test name</label>
+      <input id="test-name" type="text" autocomplete="off">
+
+      <label for="test-role">Test role</label>
+      <select id="test-role">
+        <option value="">Choose one</option>
+        <option value="developer">Developer</option>
+      </select>
+
+      <label for="test-consent">
+        <input id="test-consent" type="checkbox">
+        Synthetic checkbox
+      </label>
+
+      <output id="preview">No values saved</output>
+
+      <input id="blocked-upload" type="file" disabled>
+      <button id="blocked-submit" type="submit" disabled>
+        Submission disabled
+      </button>
+    </form>
+
+    <script>
+      const form = document.querySelector(
+        '[data-test-id="synthetic-interaction-form"]'
+      );
+      const name = document.querySelector("#test-name");
+      const role = document.querySelector("#test-role");
+      const consent = document.querySelector("#test-consent");
+      const preview = document.querySelector("#preview");
+
+      function renderPreview() {
+        preview.textContent = `${name.value}|${role.value}|${consent.checked}`;
+      }
+
+      name.addEventListener("input", renderPreview);
+      role.addEventListener("change", renderPreview);
+      consent.addEventListener("change", renderPreview);
+
+      form.addEventListener("submit", (event) => event.preventDefault());
+    </script>
+  </body>
+</html>
