@@ -73,3 +73,10 @@ data/candidate/legacy_evidence_backup/
 # Runtime-generated artifacts may contain local paths or candidate-derived content.
 /artifacts/*
 !/artifacts/.gitkeep
+
+# Local snapshot/handoff/process artifacts (contain local absolute paths)
+.aisnap/
+05_handoff_current-progress.json
+dossier.txt
+*.cleaned.patch
+web-agent-global-cli-updates.patch
