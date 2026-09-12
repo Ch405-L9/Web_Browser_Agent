@@ -1,0 +1,5 @@
+app_env: dev
+browser_headless: false
+allow_fill: false
+allow_resume_upload: false
+allow_submit: false
