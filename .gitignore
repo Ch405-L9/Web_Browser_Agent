@@ -65,3 +65,7 @@ data/candidate/manifests/
 
 # Local candidate material not intended for commits
 data/candidate/legacy_evidence_backup/
+
+# Generated local mock inspection reports
+/artifacts/local_mock_form_inventory*.json
+/artifacts/inspection/

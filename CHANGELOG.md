@@ -42,4 +42,56 @@ The project follows a release-oriented changelog format. The current development
 - No candidate data, source documents, generated artifacts, vector stores, patch files, or local hand-off material were added to the tracked change set.
 - Human review and manual submission remain required.
 
-[Unreleased]: https://github.com/Ch405-L9/Web_Browser_Agent/compare/dev...HEAD
+### Local mock inspection
+
+- Registered the `inspect-local-mock` CLI command for local, synthetic job-form inspection.
+- Added headed Playwright/Chromium rendering for the local synthetic fixture.
+- Added read-only detection of form controls, required fields, select controls, file inputs, and submit controls.
+- Added terminal reporting for the local inspection result.
+
+### Local mock safety
+
+- Enforced inspection-only behavior for the local mock harness.
+- Blocked external network access.
+- Blocked field filling, file selection or upload, submit interaction, and application submission.
+- Confirmed that the local inspection flow closes the browser after scanning and performs no application action.
+
+### Planned local mock reporting
+
+- Serialize a sanitized local form-inventory review artifact under `artifacts/`.
+- Add test coverage for fixture control count, required fields, select options, file inputs, submit controls, unsafe-policy rejection, and artifact safety flags.
+
+### Not included in this milestone
+
+- No live job-application URLs.
+- No real application pages.
+- No candidate-data entry or field filling.
+- No file upload, submission, or application completion capability.
+
+### Local mock inspection
+
+- Registered the `inspect-local-mock` CLI command for local, synthetic job-form inspection.
+- Added headed Playwright/Chromium rendering for the local synthetic fixture.
+- Added read-only detection of form controls, required fields, select controls, file inputs, and submit controls.
+- Added terminal reporting for the local inspection result.
+
+### Local mock safety
+
+- Enforced inspection-only behavior for the local mock harness.
+- Blocked external network access.
+- Blocked field filling, file selection or upload, submit interaction, and application submission.
+- Confirmed that the local inspection flow closes the browser after scanning and performs no application action.
+
+### Planned local mock reporting
+
+- Serialize a sanitized local form-inventory review artifact under `artifacts/`.
+- Add test coverage for fixture control count, required fields, select options, file inputs, submit controls, unsafe-policy rejection, and artifact safety flags.
+
+### Not included in this milestone
+
+- No live job-application URLs.
+- No real application pages.
+- No candidate-data entry or field filling.
+- No file upload, submission, or application completion capability.
+
+[Unreleased]: [https://github.com/Ch405-L9/Web_Browser_Agent/compare/dev...HEAD](https://github.com/Ch405-L9/Web_Browser_Agent/compare/dev...HEAD)

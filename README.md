@@ -74,3 +74,42 @@ When adding a command, register it in `src/web_agent_resume_builder/cli.py`, doc
 ## Project status
 
 Version `0.1.0.dev0`; development branch: `dev`.
+
+## Local mock form inspection
+
+`inspect-local-mock` is a local-only, inspection-only harness for a synthetic HTML form fixture.
+
+```bash
+web-agent inspect-local-mock
+```
+
+The command launches headed Chromium, loads only the bundled synthetic fixture, scans form structure, reports detected controls, and closes the browser. A brief visible browser window is expected.
+
+### What it detects
+
+- Form controls and their structural metadata
+- Required-field markers
+- Select controls and safe option labels
+- File-input controls
+- Submit controls
+
+### Enforced restrictions
+
+- External network access is blocked
+- Field filling is blocked
+- File selection and upload are blocked
+- Submit controls are detected but never activated
+- Application submission is not performed
+
+`inspect-local-mock` must not be used against live application pages. It does not submit applications and must not be extended to do so.
+
+### Planned local review artifact
+
+The next milestone writes a sanitized JSON review artifact under `artifacts/`. The artifact will contain structural field inventory only and must not contain:
+
+- Typed or default form values
+- Candidate identity or evidence data
+- Selected filenames or local file paths
+- Cookies, tokens, browser storage, or session data
+- Network-derived application data
+- Submission outcomes
