@@ -94,4 +94,13 @@ The project follows a release-oriented changelog format. The current development
 - No candidate-data entry or field filling.
 - No file upload, submission, or application completion capability.
 
+### Local synthetic interaction safety harness
+
+- Added a Pytest-only local synthetic interaction safety harness.
+- Added an exact approved synthetic fixture identity and immutable test policy.
+- Permitted only hard-coded synthetic DOM-only text, select, and checkbox interactions.
+- Enforced blocked network access, upload attempts, submit attempts, artifact capture, and candidate-data access.
+- Added explicit exclusions for staging/public URLs, `set_input_files()`, submit APIs, browser-state access, and candidate/resume-derived values.
+- Verified with 13 focused synthetic-interaction tests, 39 focused safety tests, and 60 total tests.
+
 [Unreleased]: [https://github.com/Ch405-L9/Web_Browser_Agent/compare/dev...HEAD](https://github.com/Ch405-L9/Web_Browser_Agent/compare/dev...HEAD)
