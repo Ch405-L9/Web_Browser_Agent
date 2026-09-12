@@ -9,11 +9,17 @@ import typer
 from rich.console import Console
 from rich.table import Table
 
+from web_agent_resume_builder.browser.local_mock import (
+    LOCAL_MOCK_POLICY,
+    inspect_local_mock_application,
+)
 from web_agent_resume_builder.candidate.evidence import validate_candidate_data
 from web_agent_resume_builder.exceptions import (
     ArtifactError,
+    BrowserInspectionError,
     ConfigurationError,
     EvidenceValidationError,
+    SafetyViolationError,
 )
 from web_agent_resume_builder.retrieval.prepare import prepare_retrieval_manifest
 from web_agent_resume_builder.safety import NO_SUBMIT_STATEMENT, enforce_no_submit
@@ -124,6 +130,46 @@ def doctor() -> None:
     table.add_row("Chroma directory", str(settings.chroma_path))
     table.add_row("Candidate data directory", str(settings.candidate_data_path))
     table.add_row("Job data directory", str(settings.job_data_path))
+
+    console.print(table)
+    console.print(NO_SUBMIT_STATEMENT)
+
+
+@app.command("inspect-local-mock")
+def inspect_local_mock() -> None:
+    """Inspect a synthetic local form in a headed, no-action browser session."""
+    settings = get_settings()
+    enforce_no_submit(settings)
+
+    try:
+        artifact = inspect_local_mock_application(LOCAL_MOCK_POLICY)
+    except (BrowserInspectionError, SafetyViolationError) as exc:
+        console.print(f"[red]Local mock inspection failed:[/red] {exc}")
+        raise typer.Exit(code=2) from exc
+
+    table = Table(title="Local Mock Inspection")
+    table.add_column("Field", style="cyan")
+    table.add_column("Value")
+
+    table.add_row("Target", artifact.target_url)
+    table.add_row("Session mode", artifact.session_mode)
+    table.add_row("Fields detected", str(len(artifact.fields)))
+    table.add_row(
+        "Upload controls detected",
+        str(sum(field.is_file_input for field in artifact.fields)),
+    )
+    table.add_row(
+        "Submit controls detected",
+        str(sum(field.is_submit_control for field in artifact.fields)),
+    )
+    table.add_row("Network", "blocked" if artifact.network_blocked else "unsafe")
+    table.add_row("Fill", "blocked" if artifact.fill_blocked else "unsafe")
+    table.add_row("Upload", "blocked" if artifact.upload_blocked else "unsafe")
+    table.add_row("Submission", "blocked" if artifact.submit_blocked else "unsafe")
+    table.add_row(
+        "Application submitted",
+        "no" if not artifact.application_submitted else "unsafe",
+    )
 
     console.print(table)
     console.print(NO_SUBMIT_STATEMENT)
