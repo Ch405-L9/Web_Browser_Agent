@@ -1,0 +1,557 @@
+mkdir -p handoff
+
+cat > handoff/SHN_comprehensive_project_handoff_2026-09-12.json <<'JSON'
+{
+  "handoff_schema_version": "1.1",
+  "handoff_type": "SHN_comprehensive_project_handoff",
+  "generated_at": "2026-09-12T01:04:00-04:00",
+  "generated_for": "AI continuation and human confirmation",
+  "project": {
+    "name": "Web_Agent_Resume-Builder",
+    "repository_name": "Web_Browser_Agent",
+    "local_path": "/home/t0n34781/projects/Web_Agent_Resume-Builder",
+    "current_branch": "dev",
+    "intended_remote_url": "https://github.com/Ch405-L9/Web_Browser_Agent.git",
+    "remote_status_at_handoff": {
+      "origin_configured": false,
+      "last_error": "fatal: 'origin' does not appear to be a git repository",
+      "meaning": "No usable local Git remote named origin was configured at the time of the last remote check."
+    },
+    "purpose": "Local-first, human-supervised job-application preparation. Application submission is intentionally disabled."
+  },
+  "technology": {
+    "language": "Python 3.12",
+    "tooling": [
+      "uv",
+      "pytest",
+      "Typer",
+      "Pydantic",
+      "Pydantic Settings",
+      "PyYAML",
+      "Git"
+    ],
+    "validated_environment": {
+      "venv_python": "/home/t0n34781/projects/Web_Agent_Resume-Builder/.venv/bin/python",
+      "python_version": "3.12.14",
+      "uv_version": "0.12.13",
+      "pytest_version": "8.4.2",
+      "pydantic_version": "2.13.5",
+      "package_import_path": "/home/t0n34781/projects/Web_Agent_Resume-Builder/src/web_agent_resume_builder/__init__.py",
+      "lockfile_validation": {
+        "command": "uv lock --check --offline",
+        "result": "PASS",
+        "resolved_packages": 111
+      },
+      "execution_notes": [
+        "Use .venv/bin/python or python3 as appropriate; the system shell command python was not available.",
+        "Use .venv/bin/python -m pytest; system pytest was not the project environment and previously failed imports.",
+        "Do not run uv run or uv sync unless a dependency or virtual-environment change is explicitly authorized.",
+        "Use offline controls when validating: UV_OFFLINE=1 and UV_PYTHON_DOWNLOADS=never."
+      ]
+    }
+  },
+  "git": {
+    "head_commit": {
+      "short_sha": "5e52f8b",
+      "message": "fix: support evidence-only drafts without job fixture",
+      "status": "committed locally and validated"
+    },
+    "recent_history": [
+      {
+        "short_sha": "5e52f8b",
+        "message": "fix: support evidence-only drafts without job fixture"
+      },
+      {
+        "short_sha": "fdab121",
+        "message": "feat: add local job fixture loader"
+      },
+      {
+        "short_sha": "77fa36b",
+        "message": "feat: add review draft CLI command"
+      },
+      {
+        "short_sha": "c6d8f69",
+        "message": "feat: add structured review artifact"
+      },
+      {
+        "short_sha": "442169c",
+        "message": "feat: add local review draft workflow"
+      },
+      {
+        "short_sha": "debb99a",
+        "message": "chore: establish initial project baseline"
+      }
+    ],
+    "branch_policy": {
+      "current_branch": "dev",
+      "do_not_rename_branch_without_explicit_user_approval": true,
+      "do_not_force_push": true,
+      "do_not_rewrite_existing_validated_history": true,
+      "recommended_first_push": "git push -u origin dev"
+    }
+  },
+  "safety_contract": {
+    "status": "NON_NEGOTIABLE",
+    "allow_submit": false,
+    "allow_fill": false,
+    "allow_resume_upload": false,
+    "browser_headless": false,
+    "browser_automation_authorized": false,
+    "network_scraping_authorized": false,
+    "remote_api_fallback_authorized": false,
+    "ollama_pull_authorized": false,
+    "full_corpus_embedding_generation_authorized": false,
+    "persistent_vector_store_creation_authorized": false,
+    "resume_source_access_authorized": false,
+    "hard_prohibition": "The software cannot and will not submit an application.",
+    "required_user_facing_statement": "NO APPLICATION HAS BEEN SUBMITTED. HUMAN REVIEW AND MANUAL SUBMISSION ARE REQUIRED.",
+    "requirements": [
+      "Human review is required before any manual application submission.",
+      "Manual submission is outside this software and must remain a human action.",
+      "Do not browse, scrape, navigate to, or derive facts from a live job-posting URL unless the user explicitly authorizes that separate action.",
+      "Do not infer job title, company, qualifications, URL details, or other job facts from directory names, filenames, templates, or prior assumptions.",
+      "Do not expose, consume, copy, upload, or resolve the source resume symlink without explicit authorization.",
+      "Do not weaken or remove safety checks to make a command pass.",
+      "Do not turn a missing approved job fixture into a guessed completed fixture.",
+      "Do not create an application submission capability."
+    ]
+  },
+  "user_non_negotiables": {
+    "status": "NON_NEGOTIABLE",
+    "requirements": [
+      "Use a local-first, human-supervised workflow.",
+      "Keep application submission disabled.",
+      "Keep application form filling disabled.",
+      "Keep resume upload disabled.",
+      "Do not use browser automation without explicit future approval.",
+      "Do not scrape or navigate to a live Blue in Green job URL to obtain missing data.",
+      "Do not infer job data from filenames, directory names, template names, or URLs.",
+      "Do not overwrite approved retrieval or indexing artifacts.",
+      "Do not stage data/, artifacts/, .aisnap/, argparse, et, hashlib, json, sys, yaml, or other unrelated local paths wholesale.",
+      "Do not run git add ., git add -A, git commit -a, git clean -fd, git reset --hard, or git push --force without a separate explicit approval.",
+      "Use the project virtual environment and offline validation controls.",
+      "Before any irreversible external action, show the exact target and intended action to the user and obtain confirmation.",
+      "For future AI continuation, output a clear done-versus-remaining checklist to the user for confirmation before making scope-expanding changes."
+    ]
+  },
+  "implementation_state": {
+    "review_only_workflow": {
+      "status": "working and validated",
+      "entry_points": [
+        ".venv/bin/web-agent-resume-builder draft",
+        ".venv/bin/web-agent-resume-builder review-draft"
+      ],
+      "draft_behavior": "Loads validated local candidate evidence and creates an in-memory review-only draft.",
+      "review_artifact_behavior": "Creates an in-memory structured local review artifact.",
+      "current_artifact_contract": {
+        "artifact_type": "local_review_draft",
+        "review_required": true,
+        "status": "review_required",
+        "evidence_record_count": 18,
+        "submission_statement": "NO APPLICATION HAS BEEN SUBMITTED. HUMAN REVIEW AND MANUAL SUBMISSION ARE REQUIRED."
+      },
+      "important_schema_boundary": [
+        "DraftArtifact currently remains evidence-only.",
+        "DraftArtifact does not currently expose job_title or company.",
+        "Do not add job fields to the review artifact without a separately approved completed local job-fixture schema and corresponding test/update plan."
+      ]
+    },
+    "job_fixture_loader": {
+      "status": "working and validated as a standalone utility",
+      "file": "src/web_agent_resume_builder/jobs/fixture.py",
+      "current_contract": [
+        "Loads exactly one completed local YAML job fixture when supplied.",
+        "Ignores files ending in .template.yaml.",
+        "Returns None when no completed fixture exists.",
+        "Raises ValueError when more than one completed YAML fixture exists.",
+        "Requires completed fixture content to parse to a YAML mapping.",
+        "Accepts title or job_title for the title field.",
+        "Accepts company or company_name for the company field.",
+        "Rejects missing or blank title/company values.",
+        "Does not perform network access, scraping, inference, filling, uploading, or submission."
+      ],
+      "integration_status": "Not integrated into the current evidence-only DraftArtifact workflow; this is intentional until an approved job-artifact schema is defined."
+    },
+    "candidate_evidence": {
+      "active_evidence_root": "data/candidate/evidence",
+      "validated_record_count": 18,
+      "legacy_backup_root": "data/candidate/legacy_evidence_backup",
+      "source_resume": {
+        "path": "data/candidate/source_material/00_ag_applied-ai-engineer_resume.pdf",
+        "restriction": "Symlink target lies outside the repository. Do not consume or expose without explicit authorization."
+      }
+    }
+  },
+  "approved_artifacts": {
+    "do_not_overwrite": [
+      "artifacts/retrieval/evidence_manifest.json",
+      "artifacts/indexing_dry_run_report.run1.json",
+      "artifacts/indexing_dry_run_report.run2.json"
+    ],
+    "indexing_preflight_dry_run": {
+      "status": "passed",
+      "canonical_report_sha256": "64c5f8d331e5abcf12acc9da9ad711ca8a8c856fbe43446bf92f85fee5bc7164",
+      "literal_report_sha256": "bc63b50b5ea6ec47999bb2117d8eaba7cc61999a7bf3bcc02167760383d73138",
+      "records_planned": 17,
+      "source_files_referenced": 17,
+      "total_text_characters": 9825,
+      "largest_chunk_characters": 694,
+      "report_byte_identical": true,
+      "report_paths": [
+        "artifacts/indexing_dry_run_report.run1.json",
+        "artifacts/indexing_dry_run_report.run2.json"
+      ]
+    },
+    "retrieval_manifest_reproducibility": {
+      "status": "passed",
+      "manifest_path": "artifacts/retrieval/evidence_manifest.json",
+      "literal_file_sha256": "f0cdd193587668abf4fa92d6347162876b971425b8d3b67ce6554134e15b57b2"
+    },
+    "local_embedding_smoke_test": {
+      "status": "passed",
+      "runtime": "local loopback Ollama",
+      "model": "nomic-embed-text:latest",
+      "repeatability": "passed; deterministic fields identical",
+      "network_access": false,
+      "model_download": false,
+      "remote_api": false,
+      "vector_store_created": false,
+      "persistent_storage_created": false
+    }
+  },
+  "validation_evidence": {
+    "latest_full_validation": {
+      "status": "PASS",
+      "test_result": "24 passed in 0.18s",
+      "commands_completed": [
+        "UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never .venv/bin/python -m compileall -q src",
+        "UV_OFFLINE=1 UV_PYTHON_DOWNLOADS=never .venv/bin/python -m pytest -q",
+        ".venv/bin/web-agent-resume-builder draft",
+        ".venv/bin/web-agent-resume-builder review-draft",
+        "git diff --check"
+      ],
+      "cli_results": {
+        "draft": {
+          "status": "PASS",
+          "validated_evidence_records": 18,
+          "artifact_status": "review_required"
+        },
+        "review_draft": {
+          "status": "PASS",
+          "artifact_type": "local_review_draft",
+          "review_required": true,
+          "validated_evidence_records": 18,
+          "artifact_status": "review_required"
+        }
+      }
+    },
+    "commit_validation": {
+      "staged_diff_check": "PASS before commit",
+      "committed_files": [
+        "src/web_agent_resume_builder/jobs/fixture.py",
+        "tests/unit/test_job_fixture.py",
+        "tests/unit/test_workflow_draft.py"
+      ],
+      "commit_scope_verified": true
+    }
+  },
+  "working_tree": {
+    "tracked_work_status": "clean immediately after commit unless later modified",
+    "known_untracked_paths_not_to_stage_without_explicit_review": [
+      ".aisnap/",
+      "argparse",
+      "artifacts/",
+      "data/",
+      "et",
+      "hashlib",
+      "json",
+      "sys",
+      "yaml"
+    ],
+    "untracked_path_policy": [
+      "Treat every untracked path as unrelated, local, or potentially sensitive until inspected and explicitly approved.",
+      "Do not use broad staging commands.",
+      "Do not delete untracked paths with git clean.",
+      "Do not assume untracked paths are disposable."
+    ]
+  },
+  "known_decisions": [
+    {
+      "decision": "Use evidence-only review artifacts when no completed approved local job fixture exists.",
+      "reason": "Avoids guessing job facts, preserves a functioning local review workflow, and respects no-scraping/no-inference restrictions.",
+      "status": "implemented and validated"
+    },
+    {
+      "decision": "Ignore .template.yaml files in the local job-fixture loader.",
+      "reason": "A template is not an approved factual fixture and must not be parsed as completed job metadata.",
+      "status": "implemented and validated"
+    },
+    {
+      "decision": "Do not integrate JobFixture data into DraftArtifact yet.",
+      "reason": "Current review-artifact schema is deliberately evidence-only. Schema expansion requires a separately approved fixture source/schema and tests.",
+      "status": "active"
+    },
+    {
+      "decision": "Keep the development branch named dev.",
+      "reason": "Avoid unnecessary branch rewriting or renaming prior to the first remote push.",
+      "status": "active"
+    }
+  ],
+  "remaining_work": [
+    {
+      "id": "REMOTE-001",
+      "priority": "high",
+      "status": "blocked_on_user_action_or_explicit_confirmation",
+      "task": "Configure the GitHub remote named origin.",
+      "required_information": "Exact intended remote URL has been supplied: https://github.com/Ch405-L9/Web_Browser_Agent.git",
+      "safe_commands": [
+        "git remote add origin https://github.com/Ch405-L9/Web_Browser_Agent.git",
+        "git remote -v",
+        "git ls-remote --heads origin"
+      ],
+      "guardrails": [
+        "Do not add credentials or tokens to the remote URL.",
+        "If origin already exists at execution time, inspect it before changing it.",
+        "Do not overwrite an unexpected origin without user confirmation."
+      ]
+    },
+    {
+      "id": "REMOTE-002",
+      "priority": "high",
+      "status": "not_started",
+      "task": "Push the validated dev branch to the empty GitHub repository.",
+      "preconditions": [
+        "origin points exactly to https://github.com/Ch405-L9/Web_Browser_Agent.git",
+        "git ls-remote --heads origin confirms the remote state",
+        "User has confirmed the remote target if any discrepancy exists"
+      ],
+      "safe_command": "git push -u origin dev",
+      "prohibited_commands": [
+        "git push --force",
+        "git push -f"
+      ],
+      "postconditions_to_verify": [
+        "git status -sb shows dev tracking origin/dev",
+        "git ls-remote --heads origin includes refs/heads/dev",
+        "GitHub displays commit 5e52f8b or its full SHA at the dev branch tip"
+      ]
+    },
+    {
+      "id": "DOCS-001",
+      "priority": "medium",
+      "status": "not_started",
+      "task": "Create or review repository documentation after the first push.",
+      "recommended_scope": [
+        "README describing local-first review-only purpose",
+        "Explicit no-submit/no-fill/no-upload safety contract",
+        "Environment setup using .venv/bin/python",
+        "Offline validation commands",
+        "Evidence-only review artifact behavior",
+        "Job fixture contract and .template.yaml exclusion",
+        "Statement that human review and manual submission are required"
+      ],
+      "guardrails": [
+        "Do not document unapproved secrets, private resume contents, external symlink targets, or sensitive candidate data.",
+        "Do not represent the software as capable of submitting applications."
+      ]
+    },
+    {
+      "id": "SCHEMA-001",
+      "priority": "deferred",
+      "status": "requires_explicit_user_approval",
+      "task": "Define a completed local job-fixture source and schema if job context should later appear in review artifacts.",
+      "required_decisions": [
+        "Approved source of completed local job data",
+        "Canonical YAML field names versus supported aliases",
+        "Whether job title/company should be rendered in DraftArtifact/review artifact",
+        "How missing versus supplied job context is represented",
+        "Tests and documentation required before integration"
+      ],
+      "prohibited_shortcuts": [
+        "Do not infer job data from filenames, directories, URLs, browser pages, templates, or job-post names.",
+        "Do not scrape a live job page.",
+        "Do not treat job_metadata.template.yaml as completed factual data."
+      ]
+    },
+    {
+      "id": "HYGIENE-001",
+      "priority": "medium",
+      "status": "deferred",
+      "task": "Inspect untracked local paths individually and decide whether each should remain local, be ignored, be documented, or be committed in a separate explicitly reviewed change.",
+      "paths": [
+        ".aisnap/",
+        "argparse",
+        "artifacts/",
+        "data/",
+        "et",
+        "hashlib",
+        "json",
+        "sys",
+        "yaml"
+      ],
+      "guardrails": [
+        "No broad add, delete, reset, or clean commands.",
+        "Never commit candidate data or generated artifacts without an explicit user decision.",
+        "Preserve approved artifacts exactly."
+      ]
+    }
+  ],
+  "next_ai_protocol": {
+    "mandatory_first_steps": [
+      "Read this complete JSON handoff before proposing changes.",
+      "Run git status --short and git status -sb.",
+      "Run git log --oneline --decorate -7.",
+      "Run git remote -v before making claims about remote state.",
+      "Do not modify files before comparing the live state to this handoff.",
+      "If a command result differs from this handoff, report the discrepancy and request user direction before irreversible actions."
+    ],
+    "pre_change_protocol": [
+      "State the intended scope, files to change, reason, validation plan, and safety impact.",
+      "Avoid speculative rewrites and generic heredocs that replace files without first inspecting their current contents.",
+      "Use exact current code paths/imports from the repository, not guessed module names.",
+      "Keep changes minimal and isolate behavior changes with unit tests.",
+      "Do not expand scope from evidence-only review into job-data rendering without explicit approval."
+    ],
+    "pre_commit_protocol": [
+      "Run targeted tests first.",
+      "Run compileall and full pytest using the project venv and offline controls.",
+      "Run both draft and review-draft commands.",
+      "Run git diff --check.",
+      "Inspect git diff and git diff --cached before staging/committing.",
+      "Stage only explicit file paths.",
+      "Confirm no prohibited untracked paths were staged."
+    ],
+    "pre_push_protocol": [
+      "Inspect git remote -v.",
+      "Confirm origin exactly matches the user-approved GitHub URL.",
+      "Fetch and inspect remote heads before a push.",
+      "Use a normal push only; do not force push.",
+      "After push, verify branch tracking and remote branch existence."
+    ],
+    "required_user_confirmation_output": {
+      "instruction": "Before performing a scope-expanding action, the AI must output the following checklist to the user and wait for confirmation where an action is irreversible, remote, or changes safety scope.",
+      "format": [
+        "DONE: list verified completed items with command/test evidence.",
+        "REMAINING: list concrete outstanding items and blockers.",
+        "PROPOSED NEXT ACTION: exact command(s), affected files, target branch/remote, and expected result.",
+        "NON-NEGOTIABLES CONFIRMED: explicitly restate no-submit/no-fill/no-upload/no-scraping/no-inference constraints.",
+        "CONFIRMATION REQUEST: ask for approval only when required for a remote, irreversible, destructive, or scope-expanding action."
+      ]
+    }
+  },
+  "handoff_checklist_for_next_ai_to_output": {
+    "done": [
+      {
+        "item": "Initial local project baseline exists.",
+        "evidence": "Commit debb99a."
+      },
+      {
+        "item": "Local review draft workflow exists.",
+        "evidence": "Commit 442169c."
+      },
+      {
+        "item": "Structured local review artifact exists.",
+        "evidence": "Commit c6d8f69."
+      },
+      {
+        "item": "review-draft CLI command exists.",
+        "evidence": "Commit 77fa36b."
+      },
+      {
+        "item": "Local job fixture loader exists.",
+        "evidence": "Commit fdab121."
+      },
+      {
+        "item": "Template-only job-fixture directories no longer break evidence-only workflow.",
+        "evidence": "Commit 5e52f8b."
+      },
+      {
+        "item": "Template YAML files are excluded from completed job fixtures.",
+        "evidence": "fixture.py contract and unit tests."
+      },
+      {
+        "item": "No completed job fixture is handled safely as None by the standalone loader.",
+        "evidence": "fixture.py contract and unit tests."
+      },
+      {
+        "item": "Full local validation succeeded.",
+        "evidence": "24 passed in 0.18s; compileall, draft, review-draft, and git diff --check passed."
+      },
+      {
+        "item": "Validated review artifact contains 18 evidence records and requires human review.",
+        "evidence": "Successful CLI output."
+      },
+      {
+        "item": "No application has been submitted.",
+        "evidence": "Required runtime statement and safety contract."
+      },
+      {
+        "item": "Scoped safety fix committed locally.",
+        "evidence": "Commit 5e52f8b."
+      }
+    ],
+    "remaining": [
+      {
+        "item": "Configure origin remote.",
+        "blocker": "No origin remote existed during last check.",
+        "proposed_target": "https://github.com/Ch405-L9/Web_Browser_Agent.git"
+      },
+      {
+        "item": "Push dev branch to GitHub.",
+        "blocker": "Requires configured remote and explicit user confirmation for external push."
+      },
+      {
+        "item": "Verify GitHub branch tracking after push.",
+        "blocker": "Depends on successful push."
+      },
+      {
+        "item": "Optionally create/review README, LICENSE, and .gitignore as separate, explicitly scoped work.",
+        "blocker": "Not started; requires content/privacy review."
+      },
+      {
+        "item": "Optionally define and approve a completed local job-fixture schema before integrating job context into review artifacts.",
+        "blocker": "No approved factual job fixture source/schema currently exists."
+      },
+      {
+        "item": "Individually inspect untracked paths and decide handling.",
+        "blocker": "No explicit user decision; must not be staged or deleted wholesale."
+      }
+    ],
+    "must_confirm_before_proceeding": [
+      {
+        "action": "Add or modify Git remote origin.",
+        "reason": "Changes repository configuration and determines an external destination."
+      },
+      {
+        "action": "Push to GitHub.",
+        "reason": "External, irreversible publication of commit history."
+      },
+      {
+        "action": "Commit or delete any currently untracked file/path.",
+        "reason": "Potentially sensitive candidate data, generated artifacts, or unrelated local files."
+      },
+      {
+        "action": "Enable browser automation, fill forms, upload a resume, submit applications, scrape job pages, or access the external resume symlink.",
+        "reason": "Explicitly prohibited unless separately and explicitly authorized."
+      },
+      {
+        "action": "Expand review artifacts to include job metadata.",
+        "reason": "Requires an approved factual source and documented schema."
+      }
+    ]
+  },
+  "human_confirmation_template": {
+    "instruction": "The next AI must present the completed and remaining checklist above, then ask the user to confirm one specific next action.",
+    "recommended_next_confirmation_question": "The local code is committed and fully validated. May I configure origin as https://github.com/Ch405-L9/Web_Browser_Agent.git and then, after verifying the remote is empty/correct, push the dev branch with git push -u origin dev?"
+  }
+}
+JSON
+
+.venv/bin/python -m json.tool \
+  handoff/SHN_comprehensive_project_handoff_2026-09-12.json \
+  > /tmp/SHN_comprehensive_project_handoff_2026-09-12.pretty.json
+
+mv /tmp/SHN_comprehensive_project_handoff_2026-09-12.pretty.json \
+  handoff/SHN_comprehensive_project_handoff_2026-09-12.json
+
+git status --short handoff/SHN_comprehensive_project_handoff_2026-09-12.json
