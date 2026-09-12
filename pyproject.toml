@@ -57,6 +57,8 @@ dev = [
 
 [project.scripts]
 web-agent-resume-builder = "web_agent_resume_builder.cli:app"
+web-agent = "web_agent_resume_builder.cli:app"
+wab = "web_agent_resume_builder.cli:app"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/web_agent_resume_builder"]
