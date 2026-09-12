@@ -179,3 +179,18 @@ def retrieval_prepare() -> None:
         "upload, form completion, or application submission was invoked."
     )
     console.print(NO_SUBMIT_STATEMENT)
+
+
+@app.command("draft")
+def draft() -> None:
+    """Build an in-memory, review-only draft summary from validated evidence."""
+    from web_agent_resume_builder.workflow.draft import build_local_draft
+
+    settings = get_settings()
+    enforce_no_submit(settings)
+    artifact = build_local_draft(settings)
+
+    console.print("[green]Local review draft created in memory.[/green]")
+    console.print(f"Validated evidence records: {artifact.evidence_record_count}")
+    console.print(f"Status: {artifact.status}")
+    console.print(artifact.submission_statement)
