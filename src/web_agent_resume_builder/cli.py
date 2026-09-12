@@ -194,3 +194,18 @@ def draft() -> None:
     console.print(f"Validated evidence records: {artifact.evidence_record_count}")
     console.print(f"Status: {artifact.status}")
     console.print(artifact.submission_statement)
+
+
+@app.command("review-draft")
+def review_draft() -> None:
+    """Render a structured, in-memory review artifact from local evidence."""
+    from web_agent_resume_builder.review.artifact import render_review_artifact
+    from web_agent_resume_builder.workflow.draft import build_local_draft
+
+    settings = get_settings()
+    enforce_no_submit(settings)
+
+    review = render_review_artifact(build_local_draft(settings))
+
+    console.print("[green]Structured local review artifact created in memory.[/green]")
+    console.print_json(data=review)
