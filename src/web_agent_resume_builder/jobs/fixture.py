@@ -17,9 +17,20 @@ class JobFixture:
     source_path: Path
 
 
-def load_job_fixture(job_data_path: Path) -> JobFixture:
-    """Load one local YAML fixture without network access."""
-    fixture_files = sorted(job_data_path.glob("*.yaml"))
+def load_job_fixture(job_data_path: Path) -> JobFixture | None:
+    """Load one completed local job YAML fixture, if one is provided.
+
+    Template YAML files are ignored. This loader does not infer job facts,
+    access the network, scrape job pages, or submit applications.
+    """
+    fixture_files = sorted(
+        path
+        for path in job_data_path.glob("*.yaml")
+        if not path.name.endswith(".template.yaml")
+    )
+
+    if not fixture_files:
+        return None
 
     if len(fixture_files) != 1:
         raise ValueError(
@@ -33,8 +44,8 @@ def load_job_fixture(job_data_path: Path) -> JobFixture:
     if not isinstance(raw, dict):
         raise ValueError(f"Job fixture must be a YAML mapping: {source_path}")
 
-    title = raw.get("title")
-    company = raw.get("company")
+    title = raw.get("title") or raw.get("job_title")
+    company = raw.get("company") or raw.get("company_name")
 
     if not isinstance(title, str) or not title.strip():
         raise ValueError(f"Job fixture title is required: {source_path}")

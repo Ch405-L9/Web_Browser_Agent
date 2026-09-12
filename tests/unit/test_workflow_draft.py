@@ -1,10 +1,14 @@
 from pathlib import Path
 
+from web_agent_resume_builder.safety import NO_SUBMIT_STATEMENT
 from web_agent_resume_builder.settings import Settings
 from web_agent_resume_builder.workflow.draft import build_local_draft
 
 
-def test_build_local_draft_counts_evidence(tmp_path: Path, monkeypatch) -> None:
+def test_build_local_draft_counts_evidence_and_requires_review(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
     evidence_root = tmp_path / "candidate" / "evidence"
     evidence_root.mkdir(parents=True)
 
@@ -26,10 +30,13 @@ source_excerpt: Verified local test evidence.
     )
 
     monkeypatch.setenv("ALLOW_SUBMIT", "false")
-    settings = Settings(candidate_data_path=tmp_path / "candidate")
+    settings = Settings(
+        candidate_data_path=tmp_path / "candidate",
+        job_data_path=tmp_path / "job",
+    )
 
     draft = build_local_draft(settings)
 
     assert draft.evidence_record_count == 1
     assert draft.status == "review_required"
-    assert "NO APPLICATION HAS BEEN SUBMITTED" in draft.submission_statement
+    assert draft.submission_statement == NO_SUBMIT_STATEMENT
