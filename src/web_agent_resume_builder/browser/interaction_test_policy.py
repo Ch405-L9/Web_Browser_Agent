@@ -64,3 +64,20 @@ def validate_local_synthetic_interaction_test_policy(
 
     if not policy.pytest_only:
         raise SafetyViolationError("This policy is restricted to Pytest.")
+
+
+def require_synthetic_fill_allowed(
+    policy: LocalSyntheticInteractionTestPolicy,
+) -> None:
+    """Allow only the approved policy to perform synthetic DOM-only fills."""
+    validate_local_synthetic_interaction_test_policy(policy)
+
+
+def reject_upload_attempt() -> None:
+    """Fail closed before any file-selection API can be called."""
+    raise SafetyViolationError("File uploads are prohibited in synthetic tests.")
+
+
+def reject_submit_attempt() -> None:
+    """Fail closed before any submit API can be called."""
+    raise SafetyViolationError("Submission is prohibited in synthetic tests.")

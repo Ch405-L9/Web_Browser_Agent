@@ -9,6 +9,9 @@ from playwright.sync_api import sync_playwright
 from web_agent_resume_builder.browser.interaction_test_policy import (
     LOCAL_SYNTHETIC_INTERACTION_TEST_POLICY,
     LocalSyntheticInteractionTestPolicy,
+    reject_submit_attempt,
+    reject_upload_attempt,
+    require_synthetic_fill_allowed,
     validate_local_synthetic_interaction_test_policy,
 )
 from web_agent_resume_builder.exceptions import SafetyViolationError
@@ -57,10 +60,17 @@ def test_policy_accepts_the_exact_synthetic_test_configuration() -> None:
     )
 
 
+def test_upload_and_submit_are_rejected_before_browser_actions() -> None:
+    with pytest.raises(SafetyViolationError, match="uploads are prohibited"):
+        reject_upload_attempt()
+
+    with pytest.raises(SafetyViolationError, match="Submission is prohibited"):
+        reject_submit_attempt()
+
+
 def test_synthetic_values_update_only_the_in_memory_dom_preview() -> None:
-    validate_local_synthetic_interaction_test_policy(
-        LOCAL_SYNTHETIC_INTERACTION_TEST_POLICY
-    )
+    policy = LOCAL_SYNTHETIC_INTERACTION_TEST_POLICY
+    require_synthetic_fill_allowed(policy)
 
     attempted_requests: list[str] = []
 
