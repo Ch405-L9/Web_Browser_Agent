@@ -69,3 +69,7 @@ data/candidate/legacy_evidence_backup/
 # Generated local mock inspection reports
 /artifacts/local_mock_form_inventory*.json
 /artifacts/inspection/
+
+# Runtime-generated artifacts may contain local paths or candidate-derived content.
+/artifacts/*
+!/artifacts/.gitkeep
