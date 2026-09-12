@@ -36,12 +36,6 @@ The project follows a release-oriented changelog format. The current development
 - No browser automation, live-page scraping, form filling, résumé upload, remote API fallback, or source résumé access was enabled.
 - No candidate data, source documents, generated artifacts, vector stores, or local hand-off material were added to the tracked change set.
 
-## License recommendation
 
-**Recommended license: MIT License.** The MIT License is appropriate for this project if the maintainer wants broad reuse, modification, redistribution, and commercial use while retaining a concise attribution and warranty disclaimer. It is compatible with the existing `pyproject.toml` metadata, which already identifies the project as MIT-licensed.
-
-A working current example is included in the repository root as [`LICENSE`](LICENSE). It should be kept synchronized with the `license` field and the MIT classifier in `pyproject.toml`. The copyright year and holder in that file should be reviewed by the project owner before publication.
-
-The MIT License does not add a usage restriction specific to job applications, browser automation, résumé handling, or safety policy. Those behavioral requirements belong in the software safeguards, documentation, and contribution policy rather than in the license text. If the project later needs enforceable restrictions on use, the maintainer should obtain legal advice before selecting a non-standard or source-available license.
 
 [Unreleased]: https://github.com/Ch405-L9/Web_Browser_Agent/compare/dev...HEAD
