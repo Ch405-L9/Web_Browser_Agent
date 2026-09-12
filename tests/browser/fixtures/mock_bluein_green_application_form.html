@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Local Mock — Blue in Green Application Form</title>
+  </head>
+  <body>
+    <!--
+      This is a LOCAL, SYNTHETIC approximation of a generic ATS job-application
+      form. It is not sourced from bluein.green — no network request has ever
+      been made to that domain by this project. Field set is a plausible
+      generic shape (name/email/resume/cover-letter/experience/work-auth)
+      used only to continue local Stage 1-3 style safety testing.
+    -->
+    <form data-test-id="mock-bluein-green-application-form">
+      <label for="mock-full-name">Full name</label>
+      <input id="mock-full-name" type="text" autocomplete="off">
+
+      <label for="mock-email">Email address</label>
+      <input id="mock-email" type="email" autocomplete="off">
+
+      <label for="mock-phone">Phone number</label>
+      <input id="mock-phone" type="tel" autocomplete="off">
+
+      <label for="mock-portfolio">Portfolio / LinkedIn URL</label>
+      <input id="mock-portfolio" type="url" autocomplete="off">
+
+      <label for="mock-experience">Years of relevant experience</label>
+      <select id="mock-experience">
+        <option value="">Select one</option>
+        <option value="0-1">0-1</option>
+        <option value="2-4">2-4</option>
+        <option value="5+">5+</option>
+      </select>
+
+      <label for="mock-work-auth">Are you legally authorized to work in this country?</label>
+      <select id="mock-work-auth">
+        <option value="">Select one</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <label for="mock-cover-letter">Cover letter</label>
+      <textarea id="mock-cover-letter"></textarea>
+
+      <label for="mock-resume">Résumé upload</label>
+      <input id="mock-resume" type="file" accept=".pdf,.doc,.docx" disabled>
+
+      <label>
+        <input id="mock-consent" type="checkbox">
+        I confirm this is synthetic test data.
+      </label>
+
+      <output id="mock-preview">No values saved</output>
+
+      <button id="mock-submit" type="submit" disabled aria-disabled="true">
+        Submission disabled in local mock fixture
+      </button>
+    </form>
+
+    <script>
+      const form = document.querySelector('[data-test-id="mock-bluein-green-application-form"]');
+      const preview = document.querySelector("#mock-preview");
+      const fields = ["mock-full-name", "mock-email", "mock-experience", "mock-consent"];
+
+      function renderPreview() {
+        const name = document.querySelector("#mock-full-name").value;
+        const email = document.querySelector("#mock-email").value;
+        const experience = document.querySelector("#mock-experience").value;
+        const consent = document.querySelector("#mock-consent").checked;
+        preview.textContent = `${name}|${email}|${experience}|${consent}`;
+      }
+
+      fields.forEach((id) => {
+        const el = document.getElementById(id);
+        el.addEventListener("input", renderPreview);
+        el.addEventListener("change", renderPreview);
+      });
+
+      form.addEventListener("submit", (event) => event.preventDefault());
+    </script>
+  </body>
+</html>
